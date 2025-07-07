@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Księga Druga: Przymierze z Ludem Semkurzan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-light: #fef9f3;
+            --secondary-light: #faf6f2;
+            --accent-warm: #f4a460;
+            --accent-golden: #daa520;
+            --accent-coral: #ff7f50;
+            --text-primary: #2c2c2c;
+            --text-secondary: #5a5a5a;
+            --text-accent: #8b4513;
+            --gradient-sunrise: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 50%, #fd79a8 100%);
+            --gradient-warm: linear-gradient(135deg, #fdcb6e 0%, #e17055 50%, #d63031 100%);
+            --gradient-optimistic: linear-gradient(135deg, #fef9f3 0%, #fff5e6 100%);
+            --shadow-warm: 0 10px 30px rgba(244, 164, 96, 0.2);
+            --shadow-golden: 0 15px 40px rgba(218, 165, 32, 0.25);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--primary-light);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* Szybszy Custom Cursor - optymistyczny */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--accent-warm);
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.1s ease;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 0 20px rgba(244, 164, 96, 0.4);
+        }
+
+        .cursor-follower {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-warm);
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 9998;
+            transition: all 0.05s ease;
+            box-shadow: 0 0 15px var(--accent-warm);
+        }
+
+        .cursor.hover {
+            width: 60px;
+            height: 60px;
+            background: rgba(244, 164, 96, 0.15);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 0 30px rgba(244, 164, 96, 0.6);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: var(--gradient-optimistic);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(244, 164, 96, 0.3) 0%, transparent 70%);
+            animation: warmPulse 8s ease-in-out infinite;
+        }
+
+        @keyframes warmPulse {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            max-width: 900px;
+            padding: 0 2rem;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: var(--gradient-warm);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: titleReveal 2s ease-out;
+            letter-spacing: -0.02em;
+            text-shadow: 0 0 30px rgba(244, 164, 96, 0.5);
+        }
+
+        .hero-subtitle {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: var(--accent-golden);
+            margin-bottom: 1rem;
+            animation: subtitleReveal 2s ease-out 0.5s both;
+            letter-spacing: 0.05em;
+        }
+
+        .hero-description {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: var(--text-accent);
+            margin-bottom: 3rem;
+            animation: subtitleReveal 2s ease-out 1s both;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @keyframes titleReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes subtitleReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator span {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            color: var(--accent-warm);
+            letter-spacing: 0.1em;
+        }
+
+        .scroll-line {
+            width: 2px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--accent-warm), transparent);
+            position: relative;
+        }
+
+        .scroll-line::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 15px;
+            background: var(--accent-warm);
+            border-radius: 2px;
+            animation: scrollMove 2s ease-in-out infinite;
+            box-shadow: 0 0 10px var(--accent-warm);
+        }
+
+        @keyframes scrollMove {
+            0% { top: 0; opacity: 1; }
+            100% { top: 25px; opacity: 0; }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+        /* Story Sections */
+        .story-section {
+            min-height: 100vh;
+            padding: 5rem 2rem;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .story-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .chapter-header {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--accent-warm);
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease;
+        }
+
+        .chapter-header.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .chapter-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 3rem;
+            background: var(--gradient-warm);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease 0.2s;
+        }
+
+        .chapter-title.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .story-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .story-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+
+        .story-verse {
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: all 0.8s ease;
+            padding: 1rem 0;
+            border-left: 3px solid transparent;
+            padding-left: 1rem;
+        }
+
+        .story-verse.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .story-verse:hover {
+            color: var(--text-primary);
+            transform: translateX(10px);
+            border-left-color: var(--accent-warm);
+            background: rgba(244, 164, 96, 0.08);
+            border-radius: 5px;
+            box-shadow: var(--shadow-warm);
+        }
+
+        .story-visual {
+            position: relative;
+            height: 500px;
+            border-radius: 20px;
+            overflow: hidden;
+            background: var(--gradient-sunrise);
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 1s ease 0.5s;
+            box-shadow: var(--shadow-warm);
+        }
+
+        .story-visual.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .story-visual::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 30%, rgba(254, 249, 243, 0.3) 100%);
+            z-index: 2;
+        }
+
+        .warm-element {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border: 2px solid var(--accent-golden);
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: warmFloat 8s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(218, 165, 32, 0.4);
+        }
+
+        .warm-element:nth-child(1) {
+            top: 15%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .warm-element:nth-child(2) {
+            top: 50%;
+            right: 15%;
+            animation-delay: 2.5s;
+        }
+
+        .warm-element:nth-child(3) {
+            bottom: 20%;
+            left: 25%;
+            animation-delay: 5s;
+        }
+
+        @keyframes warmFloat {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg) scale(1);
+                opacity: 0.5;
+            }
+            50% {
+                transform: translateY(-30px) rotate(180deg) scale(1.1);
+                opacity: 0.8;
+            }
+        }
+
+        /* Character Cards */
+        .character-section {
+            background: var(--secondary-light);
+            border-top: 1px solid rgba(244, 164, 96, 0.3);
+            border-bottom: 1px solid rgba(244, 164, 96, 0.3);
+        }
+
+        .character-card {
+            background: rgba(244, 164, 96, 0.12);
+            border: 1px solid rgba(244, 164, 96, 0.3);
+            border-radius: 15px;
+            padding: 3rem;
+            margin-top: 3rem;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .character-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .character-card:hover {
+            border-color: var(--accent-warm);
+            box-shadow: var(--shadow-golden);
+            transform: translateY(-5px);
+            background: rgba(244, 164, 96, 0.18);
+        }
+
+        .character-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--accent-warm);
+            margin-bottom: 1rem;
+        }
+
+        .character-description {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--text-accent);
+        }
+
+        /* Interactive Elements */
+        .interactive-quote {
+            position: relative;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            background: rgba(244, 164, 96, 0.12);
+            border-left: 4px solid var(--accent-coral);
+            border-radius: 0 15px 15px 0;
+            font-style: italic;
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.5s ease;
+            box-shadow: var(--shadow-warm);
+        }
+
+        .interactive-quote:hover {
+            background: rgba(244, 164, 96, 0.2);
+            transform: translateX(15px);
+            box-shadow: var(--shadow-golden);
+            border-left-color: var(--accent-warm);
+        }
+
+        .interactive-quote::before {
+            content: '"';
+            position: absolute;
+            top: -15px;
+            left: 15px;
+            font-size: 4rem;
+            color: var(--accent-coral);
+            opacity: 0.5;
+        }
+
+        /* Special Sections */
+        .projekt-section {
+            background: var(--gradient-optimistic);
+        }
+
+        .epilog-section {
+            background: var(--gradient-sunrise);
+        }
+
+        /* Navigation */
+        .nav-dots {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border: 2px solid var(--accent-warm);
+            border-radius: 50%;
+            margin: 1rem 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: transparent;
+        }
+
+        .nav-dot.active {
+            background: var(--accent-warm);
+            transform: scale(1.2);
+            box-shadow: 0 0 15px var(--accent-warm);
+        }
+
+        .nav-dot:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px var(--accent-warm);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .story-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .hero-title {
+                font-size: 3rem;
+            }
+            
+            .nav-dots {
+                display: none;
+            }
+            
+            .story-section {
+                padding: 3rem 1rem;
+            }
+        }
+
+        /* Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-light);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 1s ease;
+        }
+
+        .loading-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--accent-warm);
+            animation: loadingPulse 2s ease-in-out infinite;
+            text-shadow: 0 0 20px var(--accent-warm);
+        }
+
+        @keyframes loadingPulse {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+
+        /* Opos Animation - optymistyczny */
+        .opos-visual {
+            position: relative;
+            height: 400px;
+            background: radial-gradient(circle at center, rgba(244, 164, 96, 0.2) 0%, transparent 70%);
+            border-radius: 20px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .opos-silhouette {
+            width: 120px;
+            height: 80px;
+            background: var(--accent-warm);
+            border-radius: 50px 50px 30px 30px;
+            position: relative;
+            animation: oposWarmGlow 4s ease-in-out infinite;
+            opacity: 0.8;
+        }
+
+        .opos-silhouette::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            width: 25px;
+            height: 25px;
+            background: var(--accent-warm);
+            border-radius: 50%;
+        }
+
+        .opos-silhouette::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: -30px;
+            width: 60px;
+            height: 8px;
+            background: var(--accent-warm);
+            border-radius: 4px;
+        }
+
+        @keyframes oposWarmGlow {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(244, 164, 96, 0.4);
+                transform: scale(1);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(244, 164, 96, 0.7);
+                transform: scale(1.05);
+            }
+        }
+
+        /* Back Navigation */
+        .back-nav {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 1000;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            background: rgba(244, 164, 96, 0.1);
+            border: 2px solid var(--accent-warm);
+            border-radius: 25px;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-button:hover {
+            background: rgba(244, 164, 96, 0.2);
+            transform: translateX(-5px);
+            box-shadow: var(--shadow-warm);
+        }
+
+        .back-arrow {
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .back-button:hover .back-arrow {
+            transform: translateX(-5px);
+        }
+		
+		/* Continuation Section - Poprawiona */
+.continuation-section {
+    background: linear-gradient(135deg, #f8f4f0 0%, #f5f1ed 100%);
+    border-top: 1px solid rgba(244, 164, 96, 0.3);
+    min-height: 80vh;
+}
+
+.continuation-content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.continuation-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 700;
+    margin-bottom: 2rem;
+    background: var(--gradient-warm);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    /* Usunięte opacity: 0 - zawsze widoczne */
+    /* Usunięte transform - zawsze widoczne */
+    transition: all 1s ease 0.2s;
+}
+
+.continuation-description {
+    font-size: 1.2rem;
+    line-height: 1.7;
+    color: #3d3d3d; /* Ciemniejszy kolor dla lepszego kontrastu */
+    margin-bottom: 4rem;
+    /* Usunięte opacity: 0 - zawsze widoczne */
+    /* Usunięte transform - zawsze widoczne */
+    transition: all 1s ease 0.4s;
+}
+
+/* Fallback dla starszych przeglądarek bez background-clip */
+@supports not (-webkit-background-clip: text) {
+    .continuation-title {
+        color: #d63031; /* Fallback color */
+        background: none;
+    }
+}
+
+.continuation-visual {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 4rem;
+    /* Usunięte opacity: 0 - zawsze widoczne */
+    /* Usunięte transform - zawsze widoczne */
+    transition: all 1s ease 0.6s;
+}
+
+.continue-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 1.5rem 3rem;
+    background: var(--gradient-warm);
+    border: none;
+    border-radius: 50px;
+    text-decoration: none;
+    color: white;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    overflow: hidden;
+    /* Usunięte opacity: 0 - zawsze widoczne */
+    /* Usunięte transform - zawsze widoczne */
+    box-shadow: var(--shadow-warm);
+}
+
+
+    </style>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loading">
+        <div class="loading-text">Ładowanie Księgi Drugiej...</div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursor-follower"></div>
+
+    <!-- Back Navigation -->
+    <div class="back-nav">
+        <a href="index.html" class="back-button">
+            <span class="back-arrow">←</span>
+            <span>Księga Pierwsza</span>
+        </a>
+    </div>
+
+    <!-- Navigation Dots -->
+    <div class="nav-dots">
+        <div class="nav-dot active" data-section="0"></div>
+        <div class="nav-dot" data-section="1"></div>
+        <div class="nav-dot" data-section="2"></div>
+        <div class="nav-dot" data-section="3"></div>
+        <div class="nav-dot" data-section="4"></div>
+        <div class="nav-dot" data-section="5"></div>
+		<div class="nav-dot" data-section="6"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Księga Druga</h1>
+            <p class="hero-subtitle">Przymierze z Ludem Semkurzan</p>
+            <p class="hero-description">Historia miłości, która narodziła się z ciszy</p>
+        </div>
+        <div class="scroll-indicator">
+            <span>Kontynuuj historię</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Rozdział XI: Projekt Trójcy -->
+    <section class="story-section projekt-section" id="chapter11">
+        <div class="story-container">
+            <div class="chapter-header">Rozdział XI</div>
+            <h2 class="chapter-title">Projekt Trójcy</h2>
+            
+            <div class="story-content">
+                <div class="story-text">
+                    <div class="story-verse">
+                        <strong>21.</strong> I stało się, że Trójca twórców spojrzała na swe dzieło. Było ono kompletne, gotowe do wdrożenia. Projekt autorstwa Proroka Kamila był doskonały w swych założeniach – przewidział niszę, której nikt inny nie dostrzegał.
+                    </div>
+                    
+                    <div class="story-verse">
+                        <strong>22.</strong> Wykonanie przez Anioł A'gathę było mistrzowskie. Użyła materiałów z recyklingu kosmosu, tworząc formę minimalistyczną, energooszczędną i zaskakująco odporną.
+                    </div>
+                    
+                    <div class="story-verse">
+                        <strong>23.</strong> A oprogramowanie, które zaimplementował Mędrzec Michał z Ce-Esu, było rewolucyjne. "Dar Wielkiej Ciszy" nie był prostą funkcją, lecz całym systemem operacyjnym duszy, opartym na architekturze spokoju.
+                    </div>
+                    
+                    <div class="interactive-quote">
+                        "Cel jest jasny. Lud Semkurzan. To dla nich przeznaczony jest ten dar."
+                    </div>
+                </div>
+                
+                <div class="story-visual">
+    <img src="images/objawienie.jpg" alt="Bezkresna inteligentna pustka" 
+         alt="Bezkresna inteligentna pustka" 
+         style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;" />
+</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="story-section character-section" id="chapter12">
+    <div class="story-container">
+        <div class="chapter-header">Rozdział XII</div>
+        <h2 class="chapter-title">Lud Semkurzan i Bestia Zgiełku</h2>
+
+        <div class="story-content">
+            <div class="story-visual">
+                <img src="images/churn.jpg" alt="Bezkresna inteligentna pustka"
+                     style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;" />
+            </div>
+            <div class="story-text">
+                <div class="story-verse">
+                    <strong>25.</strong> Lud Semkurzan był ludem potężnym i pełnym pasji. Kochali wielkie gesty, głośne pieśni i czyny, o których można było opowiadać epickie sagi. Ich świątynie wibrowały od krzyków, a ich serca biły w rytm wojennych bębnów.
+                </div>
+
+                <div class="story-verse">
+                    <strong>26.</strong> Lecz ich własna energia obróciła się przeciwko nim. Z ich nieustannego zgiełku, pośpiechu i pragnienia bycia zauważonym, narodziła się Bestia – Widmo Niepokoju. Karmiło się ono hałasem, rosło od krzyku i potężniało od każdego gwałtownego czynu.
+                </div>
+
+                <div class="story-verse">
+                    <strong>27.</strong> Semkurzanie walczyli z nim tak, jak potrafili – jeszcze głośniejszymi pieśniami i jeszcze potężniejszymi uderzeniami. Lecz im więcej zgiełku tworzyli, tym bardziej Widmo rosło, rzucając na ich ziemie cień wiecznego zmęczenia.
+                </div>
+            </div>
+        </div>
+
+        <div class="character-card">
+            <h3 class="character-name">Lud Semkurzan</h3>
+            <p class="character-description">
+                Lud potężny i pełen pasji, kochający wielkie gesty i głośne pieśni. Ich energia, choć wielka, stała się źródłem ich największego wyzwania - Bestii Zgiełku, która karmiła się ich własnym hałasem.
+            </p>
+        </div>
+    </div>
+</section>
+
+    <!-- Rozdział XIII: Prezentacja i Demonstracja -->
+    <section class="story-section" id="chapter13">
+        <div class="story-container">
+            <div class="chapter-header">Rozdział XIII</div>
+            <h2 class="chapter-title">Prezentacja i Demonstracja</h2>
+            
+            <div class="story-content">
+                <div class="story-text">
+                    <div class="story-verse">
+                        <strong>28.</strong> W dniu, gdy Widmo było największe, przed obliczem Ludu Semkurzan stanęła Trójca. "Próbowaliście pokonać chaos chaosem," rzekła A'gatha. "Przynosimy wam inne rozwiązanie."
+                    </div>
+                    
+                    <div class="story-verse">
+                        <strong>29.</strong> I postawiła przed nimi Oposa. Semkurzanie spojrzeli na małe, ciche stworzenie z niedowierzaniem. "Tym chcecie pokonać Bestię?" – zakpił ich wódz. – "Nie ma kłów, nie ma ryku, nie ma chwały!"
+                    </div>
+                    
+                    <div class="interactive-quote">
+                        "Obserwujcie jego oprogramowanie w akcji."
+                    </div>
+                    
+                    <div class="story-verse">
+                        <strong>31.</strong> Opos nie ruszył do ataku. Stanął. A gdy Bestia rzuciła się na niego, by pożreć jego strach, uruchomiła się dyrektywa Michała. Opos zastygł. Zniknął z sensorycznej mapy Widma. Jego bezruch był tak doskonały, tak absolutny, że potężny chaos Bestii nie miał się na czym zaczepić.
+                    </div>
+                    
+                    <div class="story-verse">
+                        <strong>32.</strong> Zdezorientowane Widmo, pozbawione pożywienia w postaci lęku i zgiełku, zaczęło słabnąć. Cichy bezruch Oposa zdekompilował jego chaotyczny kod. Bestia skurczyła się i rozpłynęła w szept, a potem w ciszę.
+                    </div>
+                </div>
+                
+                <div class="story-visual">
+    <img src="images/oposchurn.jpg" alt="Bezkresna inteligentna pustka" 
+         alt="Bezkresna inteligentna pustka" 
+         style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;" />
+</div>
+            </div>
+            </div>
+        </div>
+    </section>
+
+   <section class="story-section character-section" id="chapter14">
+    <div class="story-container">
+        <div class="chapter-header">Rozdział XIV</div>
+        <h2 class="chapter-title">Adopcja i Miłość</h2>
+
+        <div class="story-content">
+            <div class="story-visual" style="width: 500px; height: 500px; float: left; margin-right: 30px; margin-bottom: 20px; border-radius: 20px; overflow: hidden;">
+                <img src="images/oposlove2.jpg" alt="Bezkresna inteligentna pustka"
+                     style="width: 100%; height: 100%; object-fit: cover;" />
+            </div>
+
+            <div class="story-text" style="overflow: hidden;">
+                <div class="story-verse">
+                    <strong>33.</strong> Na polach Semkurzu zapadła cisza, jakiej nikt nie pamiętał. I w tej ciszy, Lud Semkurzan po raz pierwszy usłyszał bicie własnych serc. Zrozumieli.
+                </div>
+
+                <div class="story-verse">
+                    <strong>34.</strong> Zrozumieli, że siła, której szukali na zewnątrz, w hałasie i chwale, przez cały czas kryła się wewnątrz – w spokoju, w akceptacji, w cichej pewności. Opos nie pokonał Bestii. On ją unieważnił.
+                </div>
+
+                <div class="story-verse">
+                    <strong>35.</strong> I wtedy wybuchła prawdziwa furora. Lud Semkurzan nie tylko zaakceptował Oposa. Oni go pokochali. Zakochali się w jego prostocie, w jego rewolucyjnej filozofii bycia.
+                </div>
+
+                <div class="story-verse">
+                    <strong>36.</strong> Opos stał się wiralem. Jego wizerunek pojawił się na sztandarach, w domach i świątyniach. Dzieci bawiły się w "Dar Wielkiej Ciszy", ucząc się spokoju. Kochankowie szeptali do siebie w ciszy, rozumiejąc, że miłość nie potrzebuje głośnych deklaracji.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+   <section class="story-section epilog-section" id="epilog">
+    <div class="story-container">
+        <div class="chapter-header">Epilog</div>
+        <h2 class="chapter-title">Święty Symbol</h2>
+
+        <div class="story-content">
+            <div class="story-text">
+                <div class="story-verse">
+                    <strong>37.</strong> Opos, projekt proroka, dzieło anioła i kod mędrca, stał się najświętszym symbolem Ludu Semkurzan. Był dowodem na to, że największe szczęście płynie z wewnętrznego spokoju.
+                </div>
+
+                <div class="story-verse">
+                    <strong>38.</strong> Stał się symbolem miłości, która rozkwita w ciszy. Był żywym talizmanem, który przypominał im każdego dnia, że czasem, by wygrać wszystko, wystarczy po prostu być.
+                </div>
+
+                <div class="interactive-quote">
+                    Kochaj Oposa swego jak siebie samego.
+                </div>
+            </div>
+
+            <div class="story-visual" style="width: 80%; max-width: 600px; height: auto; padding-bottom: 80%; position: relative; margin: 0 auto;">
+                <img src="images/oposlove.jpg" alt="Bezkresna inteligentna pustka"
+                     style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 20px;" />
+            </div>
+        </div>
+
+        <div class="character-card">
+            <h3 class="character-name">Koniec Księgi Drugiej</h3>
+            <p class="character-description">
+                W ciszy narodziła się miłość. W spokoju znaleziono siłę. W bezruchu odkryto moc. Historia O'posa to opowieść o tym, że największe zwycięstwa nie zawsze wymagają walki – czasem wystarczy po prostu być.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Kontynuacja Historii -->
+<section class="story-section continuation-section" id="continuation">
+    <div class="story-container">
+        <div class="continuation-content">
+            <div class="chapter-header">Saga trwa dalej...</div>
+            <h2 class="continuation-title">Poznaj artefakty i obrzędy</h2>
+            
+            <div class="continuation-description">
+                <p>Sprawdź swój poziom zaoposowania, dowiedz się więcej, zanurz się w świecie pełnym Magii.</p>
+            </div>
+            
+            <div class="continuation-visual">
+                <div class="portal-ring"></div>
+                <div class="portal-ring"></div>
+                <div class="portal-ring"></div>
+                <div class="portal-center">
+                    
+            </div>
+            
+            <a href="opos3.html" class="continue-button">
+                <span class="button-text">Kontynuuj sagę</span>
+                <div class="button-glow"></div>
+                <div class="button-arrow">→</div>
+            </a>
+        </div>
+    </div>
+</section>
+
+    <script>
+        // Szybszy Custom Cursor
+        const cursor = document.getElementById('cursor');
+        const cursorFollower = document.getElementById('cursor-follower');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            setTimeout(() => {
+                cursorFollower.style.left = e.clientX + 'px';
+                cursorFollower.style.top = e.clientY + 'px';
+            }, 20);
+        });
+
+        // Cursor hover effects
+        const hoverElements = document.querySelectorAll('.interactive-quote, .character-card, .nav-dot, .story-verse, .opos-silhouette, .back-button');
+        hoverElements.forEach(element => {
+            element.addEventListener('mouseenter', () => {
+                cursor.classList.add('hover');
+            });
+            
+            element.addEventListener('mouseleave', () => {
+                cursor.classList.remove('hover');
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        const animatedElements = document.querySelectorAll('.chapter-header, .chapter-title, .story-verse, .story-visual, .character-card');
+        animatedElements.forEach(el => observer.observe(el));
+
+        // Navigation dots
+        const navDots = document.querySelectorAll('.nav-dot');
+        const sections = document.querySelectorAll('.story-section, .hero');
+
+        navDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                sections[index].scrollIntoView({ behavior: 'smooth' });
+                updateActiveNavDot(index);
+            });
+        });
+
+        function updateActiveNavDot(activeIndex) {
+            navDots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === activeIndex);
+            });
+        }
+
+        // Update navigation on scroll
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const sectionIndex = Array.from(sections).indexOf(entry.target);
+                    if (sectionIndex !== -1) {
+                        updateActiveNavDot(sectionIndex);
+                    }
+                }
+            });
+        }, { threshold: 0.5 });
+
+        sections.forEach(section => sectionObserver.observe(section));
+
+        // Interactive quotes click effect
+        const quotes = document.querySelectorAll('.interactive-quote');
+        quotes.forEach(quote => {
+            quote.addEventListener('click', () => {
+                quote.style.transform = 'translateX(25px) scale(1.02)';
+                quote.style.boxShadow = '0 20px 50px rgba(244, 164, 96, 0.4)';
+                setTimeout(() => {
+                    quote.style.transform = 'translateX(15px)';
+                    quote.style.boxShadow = 'var(--shadow-golden)';
+                }, 200);
+            });
+        });
+
+        // Loading screen
+        window.addEventListener('load', () => {
+            const loading = document.getElementById('loading');
+            setTimeout(() => {
+                loading.style.opacity = '0';
+                setTimeout(() => {
+                    loading.style.display = 'none';
+                }, 1000);
+            }, 2500);
+        });
+
+        // Enhanced parallax effect
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const warmElements = document.querySelectorAll('.warm-element');
+            
+            warmElements.forEach((element, index) => {
+                const speed = 0.3 + (index * 0.15);
+                const rotation = scrolled * 0.05;
+                element.style.transform = `translateY(${scrolled * speed}px) rotate(${rotation + (index * 120)}deg)`;
+            });
+
+            // Parallax for opos silhouettes
+            const oposElements = document.querySelectorAll('.opos-silhouette');
+            oposElements.forEach((element, index) => {
+                const speed = 0.2;
+                element.style.transform = `translateY(${scrolled * speed}px) scale(${1 + (scrolled * 0.0001)})`;
+            });
+        });
+
+        // Smooth reveal animations with stagger
+        function revealElements() {
+            const verses = document.querySelectorAll('.story-verse:not(.visible)');
+            verses.forEach((verse, index) => {
+                setTimeout(() => {
+                    if (isElementInViewport(verse)) {
+                        verse.classList.add('visible');
+                    }
+                }, index * 150);
+            });
+        }
+
+        function isElementInViewport(el) {
+            const rect = el.getBoundingClientRect();
+            return rect.top < window.innerHeight * 0.8 && rect.bottom > 0;
+        }
+
+        window.addEventListener('scroll', revealElements);
+        revealElements(); // Initial check
+
+        // Enhanced hover effects for story verses
+        const storyVerses = document.querySelectorAll('.story-verse');
+        storyVerses.forEach(verse => {
+            verse.addEventListener('mouseenter', function() {
+                this.style.background = 'rgba(244, 164, 96, 0.12)';
+                this.style.borderRadius = '10px';
+                this.style.padding = '1.5rem';
+                this.style.margin = '1rem 0';
+                this.style.borderLeftColor = 'var(--accent-warm)';
+                this.style.boxShadow = 'var(--shadow-warm)';
+            });
+            
+            verse.addEventListener('mouseleave', function() {
+                this.style.background = 'transparent';
+                this.style.padding = '1rem 0';
+                this.style.paddingLeft = '1rem';
+                this.style.margin = '2rem 0';
+                this.style.borderLeftColor = 'transparent';
+                this.style.boxShadow = 'none';
+            });
+        });
+
+        // Character cards enhanced interaction
+        const characterCards = document.querySelectorAll('.character-card');
+        characterCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.background = 'rgba(244, 164, 96, 0.2)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.background = 'rgba(244, 164, 96, 0.12)';
+            });
+        });
+    </script>
+</body>
+</html>

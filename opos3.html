@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Księga Trzecia: Uniwersum Oposa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-light: #f8f6f4;
+            --secondary-light: #f3f1ef;
+            --accent-neutral: #a8a5a0;
+            --accent-warm-grey: #c7c2bc;
+            --accent-sage: #9ca394;
+            --text-primary: #2c2c2c;
+            --text-secondary: #5a5a5a;
+            --text-accent: #6b6b6b;
+            --gradient-neutral: linear-gradient(135deg, #e8e6e3 0%, #d4d0cb 50%, #bfbab4 100%);
+            --gradient-soft: linear-gradient(135deg, #f8f6f4 0%, #f0ede9 100%);
+            --shadow-soft: 0 10px 30px rgba(168, 165, 160, 0.15);
+            --shadow-medium: 0 15px 40px rgba(199, 194, 188, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--primary-light);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--accent-neutral);
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.1s ease;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 0 20px rgba(168, 165, 160, 0.4);
+        }
+
+        .cursor-follower {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-neutral);
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 9998;
+            transition: all 0.05s ease;
+            box-shadow: 0 0 15px var(--accent-neutral);
+        }
+
+        .cursor.hover {
+            width: 60px;
+            height: 60px;
+            background: rgba(168, 165, 160, 0.15);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 0 30px rgba(168, 165, 160, 0.6);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: var(--gradient-soft);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(168, 165, 160, 0.2) 0%, transparent 70%);
+            animation: neutralPulse 8s ease-in-out infinite;
+        }
+
+        @keyframes neutralPulse {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.05); }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            max-width: 900px;
+            padding: 0 2rem;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: var(--gradient-neutral);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: titleReveal 2s ease-out;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-subtitle {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: var(--accent-sage);
+            margin-bottom: 1rem;
+            animation: subtitleReveal 2s ease-out 0.5s both;
+            letter-spacing: 0.05em;
+        }
+
+        .hero-description {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: var(--text-accent);
+            margin-bottom: 3rem;
+            animation: subtitleReveal 2s ease-out 1s both;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @keyframes titleReveal {
+            0% { opacity: 0; transform: translateY(50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes subtitleReveal {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Navigation */
+        .nav-dots {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border: 2px solid var(--accent-neutral);
+            border-radius: 50%;
+            margin: 1rem 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: transparent;
+        }
+
+        .nav-dot.active {
+            background: var(--accent-neutral);
+            transform: scale(1.2);
+            box-shadow: 0 0 15px var(--accent-neutral);
+        }
+
+        /* Back Navigation */
+        .back-nav {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 1000;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            background: rgba(168, 165, 160, 0.1);
+            border: 2px solid var(--accent-neutral);
+            border-radius: 25px;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-button:hover {
+            background: rgba(168, 165, 160, 0.2);
+            transform: translateX(-5px);
+            box-shadow: var(--shadow-soft);
+        }
+
+        /* Sections */
+        .content-section {
+            min-height: 100vh;
+            padding: 5rem 2rem;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .section-header {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--accent-neutral);
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 3rem;
+            text-align: center;
+            background: var(--gradient-neutral);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+		
+		/* Spiritual Section */
+.spiritual-section {
+    background: var(--gradient-soft);
+    border-bottom: 1px solid rgba(168, 165, 160, 0.3);
+}
+
+.spiritual-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    margin-bottom: 4rem;
+}
+
+.spiritual-text {
+    font-size: 1.2rem;
+    line-height: 1.8;
+}
+
+.spiritual-verse {
+    margin-bottom: 2rem;
+    color: var(--text-secondary);
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1s ease;
+}
+
+.spiritual-verse.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.spiritual-verse strong {
+    color: var(--accent-sage);
+    font-weight: 600;
+}
+
+.spiritual-visual {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sacred-symbol {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin-bottom: 2rem;
+}
+
+.opos-mandala {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    animation: mandalaRotate 60s infinite linear;
+}
+
+.mandala-ring {
+    position: absolute;
+    border: 2px solid;
+    border-radius: 50%;
+    opacity: 0.6;
+}
+
+.outer-ring {
+    width: 300px;
+    height: 300px;
+    border-color: var(--accent-neutral);
+    top: 0;
+    left: 0;
+}
+
+.middle-ring {
+    width: 200px;
+    height: 200px;
+    border-color: var(--accent-warm-grey);
+    top: 50px;
+    left: 50px;
+    animation: mandalaRotate 40s infinite linear reverse;
+}
+
+.inner-ring {
+    width: 100px;
+    height: 100px;
+    border-color: var(--accent-sage);
+    top: 100px;
+    left: 100px;
+}
+
+.sacred-center {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    top: 120px;
+    left: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.opos-essence {
+    width: 40px;
+    height: 25px;
+    background: var(--gradient-neutral);
+    border-radius: 20px 20px 15px 15px;
+    position: relative;
+    animation: essenceGlow 4s ease-in-out infinite;
+}
+
+.opos-essence::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 8px;
+    width: 10px;
+    height: 10px;
+    background: var(--accent-sage);
+    border-radius: 50%;
+}
+
+.opos-essence::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    right: -12px;
+    width: 20px;
+    height: 3px;
+    background: var(--accent-sage);
+    border-radius: 2px;
+}
+
+@keyframes mandalaRotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes essenceGlow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(156, 163, 148, 0.4);
+        transform: scale(1);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(156, 163, 148, 0.7);
+        transform: scale(1.05);
+    }
+}
+
+.sacred-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    text-align: center;
+    color: var(--accent-sage);
+    line-height: 1.6;
+}
+
+/* Hierarchy Cards */
+.hierarchy-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.hierarchy-card {
+    background: rgba(168, 165, 160, 0.08);
+    border: 1px solid rgba(168, 165, 160, 0.2);
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.hierarchy-card.highlighted {
+    border-color: var(--accent-sage);
+    background: rgba(156, 163, 148, 0.12);
+}
+
+.hierarchy-card.sacred {
+    border-color: var(--accent-warm-grey);
+    background: rgba(199, 194, 188, 0.12);
+    box-shadow: var(--shadow-soft);
+}
+
+.hierarchy-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
+}
+
+.hierarchy-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.hierarchy-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.hierarchy-description {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+
+        /* Infografika Poziomów */
+        .levels-section {
+            background: var(--secondary-light);
+            border-top: 1px solid rgba(168, 165, 160, 0.3);
+            border-bottom: 1px solid rgba(168, 165, 160, 0.3);
+        }
+
+        .levels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .level-card {
+            background: rgba(168, 165, 160, 0.08);
+            border: 1px solid rgba(168, 165, 160, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .level-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-medium);
+            border-color: var(--accent-neutral);
+        }
+
+        .level-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent-neutral);
+            margin-bottom: 1rem;
+        }
+
+        .level-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .level-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+
+        .level-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-neutral);
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        /* Kalendarium */
+        .calendar-section {
+            background: var(--gradient-soft);
+        }
+
+        .calendar-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: var(--shadow-medium);
+            overflow: hidden;
+        }
+
+        .calendar-header {
+            background: var(--gradient-neutral);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .calendar-month {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+        }
+
+        .calendar-day-header {
+            background: var(--secondary-light);
+            padding: 1rem;
+            text-align: center;
+            font-weight: 600;
+            color: var(--text-accent);
+            border: 1px solid rgba(168, 165, 160, 0.1);
+        }
+
+        .calendar-day {
+            padding: 1rem;
+            text-align: center;
+            border: 1px solid rgba(168, 165, 160, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            min-height: 80px;
+        }
+
+        .calendar-day:hover {
+            background: var(--secondary-light);
+        }
+
+        .calendar-day.special {
+            background: rgba(156, 163, 148, 0.1);
+            color: var(--accent-sage);
+            font-weight: 600;
+        }
+
+        .calendar-day.special::after {
+            content: '🦌';
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            font-size: 0.8rem;
+        }
+
+        .event-tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--text-primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 10;
+        }
+
+        .calendar-day:hover .event-tooltip {
+            opacity: 1;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--secondary-light);
+            border-top: 1px solid rgba(168, 165, 160, 0.3);
+            text-align: center;
+        }
+
+        .cta-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: var(--text-primary);
+        }
+
+        .cta-description {
+            font-size: 1.2rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem 3rem;
+            background: var(--gradient-neutral);
+            border: none;
+            border-radius: 50px;
+            text-decoration: none;
+            color: white;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .cta-icon {
+            margin-right: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        /* Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-light);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 1s ease;
+        }
+
+        .loading-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--accent-neutral);
+            animation: loadingPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes loadingPulse {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .levels-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-dots {
+                display: none;
+            }
+            
+            .content-section {
+                padding: 3rem 1rem;
+            }
+
+            .calendar-day {
+                min-height: 60px;
+                padding: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loading">
+        <div class="loading-text">Ładowanie Księgi Trzeciej...</div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursor-follower"></div>
+
+    <!-- Back Navigation -->
+    <div class="back-nav">
+        <a href="opos2.html" class="back-button">
+            <span>← Księga Druga</span>
+        </a>
+    </div>
+
+    <!-- Navigation Dots -->
+    <div class="nav-dots">
+        <div class="nav-dot active" data-section="0"></div>
+        <div class="nav-dot" data-section="1"></div>
+        <div class="nav-dot" data-section="2"></div>
+        <div class="nav-dot" data-section="3"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Księga Trzecia</h1>
+            <p class="hero-subtitle">Uniwersum Oposa</p>
+            <p class="hero-description">Przewodnik po poziomach zaoposowania i wspólnocie</p>
+        </div>
+    </section>
+	
+	<!-- Sekcja Wprowadzająca - Duchowa Droga -->
+<section class="content-section spiritual-section" id="spiritual">
+    <div class="section-container">
+        <div class="section-header">Wprowadzenie</div>
+        <h2 class="section-title">Droga Duchowego Poznania</h2>
+        
+        <div class="spiritual-content">
+            <div class="spiritual-text">
+                <div class="spiritual-verse">
+                    Opos jest lustrzanym odbiciem wszystkich istniejących emocji, myśli i pragnień. 
+                    W jego cichej mądrości ludzie odnajdują refleksję własnych dusz, 
+                    odkrywając prawdę o naturze spokoju i wewnętrznej harmonii.
+                </div>
+                
+                <div class="spiritual-verse">
+                    Ci, którzy zaufali Oposowi i przyjęli jego Ewangelię, zostali wyniesieni 
+                    do rangi <strong>Zaopośowanych</strong> – bytów szlachetniejszych niż ludy puste, 
+                    nie pojmujące Miłosierdzia zwierzęcia.
+                </div>
+                
+                <div class="spiritual-verse">
+                    Osoby, które przyjęły wszystkie Oposakramenty, dostępują najwyższego zaszczytu: 
+                    zostania <strong>Apostołem na Drodze Ogona</strong> – przewodnikiem dla tych, 
+                    którzy dopiero rozpoczynają swoją duchową podróż ku wielkiej ciszy.
+                </div>
+            </div>
+            
+            <div class="spiritual-visual">
+                <div class="sacred-symbol">
+                    <div class="opos-mandala">
+                        <div class="mandala-ring outer-ring"></div>
+                        <div class="mandala-ring middle-ring"></div>
+                        <div class="mandala-ring inner-ring"></div>
+                        <div class="sacred-center">
+                            <div class="opos-essence"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sacred-text">
+                    "W ciszy odnajdujesz siebie<br>
+                    W spokoju odkrywasz moc<br>
+                    W bezruchu poznajesz prawdę"
+                </div>
+            </div>
+        </div>
+        
+        <div class="hierarchy-cards">
+            <div class="hierarchy-card">
+                <div class="hierarchy-icon">🌱</div>
+                <h3 class="hierarchy-title">Początkujący</h3>
+                <p class="hierarchy-description">Ci, którzy dopiero poznają ścieżkę Oposa</p>
+            </div>
+            
+            <div class="hierarchy-card highlighted">
+                <div class="hierarchy-icon">✨</div>
+                <h3 class="hierarchy-title">Zaopośowani</h3>
+                <p class="hierarchy-description">Przyjęli Ewangelię i poznali Miłosierdzie</p>
+            </div>
+            
+            <div class="hierarchy-card sacred">
+                <div class="hierarchy-icon">🕊️</div>
+                <h3 class="hierarchy-title">Apostołowie na Drodze Ogona</h3>
+                <p class="hierarchy-description">Przewodnicy przyjęli wszystkie Oposakramenty</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    <!-- Infografika Poziomów Zaoposowania -->
+    <section class="content-section levels-section" id="levels">
+        <div class="section-container">
+            <div class="section-header">Infografika</div>
+            <h2 class="section-title">Poziomy Zaoposowania</h2>
+            
+            <div class="levels-grid">
+                <div class="level-card">
+                    <div class="level-icon">🌱</div>
+                    <div class="level-number">I</div>
+                    <h3 class="level-title">Początkujący Opos</h3>
+                    <p class="level-description">Pierwsze kroki w odkrywaniu mocy ciszy. Uczysz się zatrzymywać się i obserwować świat wokół siebie.</p>
+                </div>
+
+                <div class="level-card">
+                    <div class="level-icon">🧘</div>
+                    <div class="level-number">II</div>
+                    <h3 class="level-title">Praktykujący Spokój</h3>
+                    <p class="level-description">Potrafisz zachować ciszę w trudnych sytuacjach. Twoja obecność uspokaja innych.</p>
+                </div>
+
+                <div class="level-card">
+                    <div class="level-icon">⚖️</div>
+                    <div class="level-number">III</div>
+                    <h3 class="level-title">Mistrz Równowagi</h3>
+                    <p class="level-description">Osiągnąłeś harmonię między działaniem a bezruchem. Twoja mądrość jest widoczna w każdym geście.</p>
+                </div>
+
+                <div class="level-card">
+                    <div class="level-icon">🌟</div>
+                    <div class="level-number">IV</div>
+                    <h3 class="level-title">Oświecony Przewodnik</h3>
+                    <p class="level-description">Twoja cisza stała się źródłem mocy. Nauczasz innych przez własny przykład.</p>
+                </div>
+
+                <div class="level-card">
+                    <div class="level-icon">♾️</div>
+                    <div class="level-number">V</div>
+                    <h3 class="level-title">Wieczny Opos</h3>
+                    <p class="level-description">Osiągnąłeś jedność z uniwersalną ciszą. Jesteś żywym wcieleniem filozofii Oposa.</p>
+                </div>
+
+                <div class="level-card">
+                    <div class="level-icon">🌌</div>
+                    <div class="level-number">∞</div>
+                    <h3 class="level-title">Kosmiczny Opos</h3>
+                    <p class="level-description">Przekroczyłeś ludzkie ograniczenia. Twoja esencja rozprzestrzenia się po całym wszechświecie.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kalendarium Oposowe -->
+    <section class="content-section calendar-section" id="calendar">
+        <div class="section-container">
+            <div class="section-header">Kalendarium</div>
+            <h2 class="section-title">Oposowy Miesiąc</h2>
+            
+            <div class="calendar-container">
+                <div class="calendar-header">
+                    <div class="calendar-month">Listopad 2025</div>
+                    <div>Miesiąc Wielkiej Ciszy</div>
+                </div>
+                
+                <div class="calendar-grid">
+                    <div class="calendar-day-header">Pon</div>
+                    <div class="calendar-day-header">Wt</div>
+                    <div class="calendar-day-header">Śr</div>
+                    <div class="calendar-day-header">Czw</div>
+                    <div class="calendar-day-header">Pt</div>
+                    <div class="calendar-day-header">Sob</div>
+                    <div class="calendar-day-header">Ndz</div>
+                    
+                    <div class="calendar-day"></div>
+                    <div class="calendar-day"></div>
+                    <div class="calendar-day"></div>
+                    <div class="calendar-day"></div>
+                    <div class="calendar-day"></div>
+                    <div class="calendar-day">1</div>
+                    <div class="calendar-day special">
+                        2
+                        <div class="event-tooltip">Dzień Cichej Refleksji</div>
+                    </div>
+                    
+                    <div class="calendar-day">3</div>
+                    <div class="calendar-day">4</div>
+                    <div class="calendar-day">5</div>
+                    <div class="calendar-day">6</div>
+                    <div class="calendar-day special">
+                        7
+                        <div class="event-tooltip">Medytacja Grupowa</div>
+                    </div>
+                    <div class="calendar-day">8</div>
+                    <div class="calendar-day">9</div>
+                    
+                    <div class="calendar-day">10</div>
+                    <div class="calendar-day">11</div>
+                    <div class="calendar-day">12</div>
+                    <div class="calendar-day">13</div>
+                    <div class="calendar-day special">
+                        14
+                        <div class="event-tooltip">Dzień Bez Słów</div>
+                    </div>
+                    <div class="calendar-day">15</div>
+                    <div class="calendar-day">16</div>
+                    
+                    <div class="calendar-day">17</div>
+                    <div class="calendar-day">18</div>
+                    <div class="calendar-day">19</div>
+                    <div class="calendar-day">20</div>
+                    <div class="calendar-day special">
+                        21
+                        <div class="event-tooltip">Święto Oposa</div>
+                    </div>
+                    <div class="calendar-day">22</div>
+                    <div class="calendar-day">23</div>
+                    
+                    <div class="calendar-day">24</div>
+                    <div class="calendar-day">25</div>
+                    <div class="calendar-day">26</div>
+                    <div class="calendar-day">27</div>
+                    <div class="calendar-day special">
+                        28
+                        <div class="event-tooltip">Zgromadzenie Mędrców</div>
+                    </div>
+                    <div class="calendar-day">29</div>
+                    <div class="calendar-day">30</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="content-section cta-section" id="cta">
+        <div class="section-container">
+            <div class="cta-container">
+                <h2 class="cta-title">Dołącz do Wspólnoty</h2>
+                <p class="cta-description">
+                    Stań się częścią globalnej społeczności praktykujących filozofię Oposa. 
+                    Dziel się swoimi doświadczeniami, ucz się od innych i odkrywaj nowe poziomy spokoju.
+                </p>
+                
+                <a href="https://x.com/opos_community" class="cta-button" target="_blank" rel="noopener noreferrer">
+                    <span class="cta-icon">🐦</span>
+                    <span>Dołącz na X.com</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Custom Cursor
+        const cursor = document.getElementById('cursor');
+        const cursorFollower = document.getElementById('cursor-follower');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            setTimeout(() => {
+                cursorFollower.style.left = e.clientX + 'px';
+                cursorFollower.style.top = e.clientY + 'px';
+            }, 20);
+        });
+
+        // Cursor hover effects
+        const hoverElements = document.querySelectorAll('.level-card, .calendar-day, .cta-button, .nav-dot, .back-button');
+        hoverElements.forEach(element => {
+            element.addEventListener('mouseenter', () => {
+                cursor.classList.add('hover');
+            });
+            
+            element.addEventListener('mouseleave', () => {
+                cursor.classList.remove('hover');
+            });
+        });
+
+        // Navigation dots
+        const navDots = document.querySelectorAll('.nav-dot');
+        const sections = document.querySelectorAll('.hero, .content-section');
+
+        navDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                sections[index].scrollIntoView({ behavior: 'smooth' });
+                updateActiveNavDot(index);
+            });
+        });
+
+        function updateActiveNavDot(activeIndex) {
+            navDots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === activeIndex);
+            });
+        }
+
+        // Update navigation on scroll
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const sectionIndex = Array.from(sections).indexOf(entry.target);
+                    if (sectionIndex !== -1) {
+                        updateActiveNavDot(sectionIndex);
+                    }
+                }
+            });
+        }, { threshold: 0.5 });
+
+        sections.forEach(section => sectionObserver.observe(section));
+
+        // Level cards animation
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, index * 100);
+                }
+            });
+        }, observerOptions);
+
+        // Initialize level cards
+        const levelCards = document.querySelectorAll('.level-card');
+        levelCards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'all 0.6s ease';
+            observer.observe(card);
+        });
+
+        // Loading screen
+        window.addEventListener('load', () => {
+            const loading = document.getElementById('loading');
+            setTimeout(() => {
+                loading.style.opacity = '0';
+                setTimeout(() => {
+                    loading.style.display = 'none';
+                }, 1000);
+            }, 2000);
+        });
+
+        // Calendar interaction
+        const calendarDays = document.querySelectorAll('.calendar-day');
+        calendarDays.forEach(day => {
+            day.addEventListener('click', () => {
+                if (day.classList.contains('special')) {
+                    day.style.transform = 'scale(1.1)';
+                    day.style.background = 'rgba(156, 163, 148, 0.3)';
+                    setTimeout(() => {
+                        day.style.transform = 'scale(1)';
+                        day.style.background = 'rgba(156, 163, 148, 0.1)';
+                    }, 200);
+                }
+            });
+        });
+
+        // CTA button enhancement
+        const ctaButton = document.querySelector('.cta-button');
+        ctaButton.addEventListener('click', () => {
+            // Track click event (analytics would go here)
+            console.log('CTA clicked - redirecting to X.com');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skąd wzięły się oposy? - Apokryficzna Księga O'posa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-dark: #0a0e1a;
+            --secondary-dark: #1a1e2e;
+            --accent-celestial: #87ceeb;
+            --accent-divine: #b0e0e6;
+            --accent-heavenly: #f0f8ff;
+            --text-primary: #ffffff;
+            --text-secondary: #c5d7e8;
+            --text-accent: #a2c4e0;
+            --gradient-celestial: linear-gradient(135deg, #4682b4 0%, #87ceeb 50%, #b0e0e6 100%);
+            --gradient-heavenly: linear-gradient(135deg, #191970 0%, #4169e1 50%, #87ceeb 100%);
+            --gradient-divine: linear-gradient(135deg, #0a0e1a 0%, #1e3a8a 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--primary-dark);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* Szybszy Custom Cursor */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--accent-celestial);
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.1s ease;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 0 20px rgba(135, 206, 235, 0.3);
+        }
+
+        .cursor-follower {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-celestial);
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 9998;
+            transition: all 0.05s ease;
+            box-shadow: 0 0 15px var(--accent-celestial);
+        }
+
+        .cursor.hover {
+            width: 60px;
+            height: 60px;
+            background: rgba(135, 206, 235, 0.15);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 0 30px rgba(135, 206, 235, 0.5);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: var(--gradient-divine);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(135, 206, 235, 0.2) 0%, transparent 70%);
+            animation: celestialPulse 6s ease-in-out infinite;
+        }
+
+        @keyframes celestialPulse {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.1); }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            max-width: 900px;
+            padding: 0 2rem;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: var(--gradient-celestial);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: titleReveal 2s ease-out;
+            letter-spacing: -0.02em;
+            text-shadow: 0 0 30px rgba(135, 206, 235, 0.5);
+        }
+
+        .hero-subtitle {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: var(--accent-divine);
+            margin-bottom: 1rem;
+            animation: subtitleReveal 2s ease-out 0.5s both;
+            letter-spacing: 0.05em;
+        }
+
+        .hero-description {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: var(--text-accent);
+            margin-bottom: 3rem;
+            animation: subtitleReveal 2s ease-out 1s both;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @keyframes titleReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes subtitleReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator span {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            color: var(--accent-celestial);
+            letter-spacing: 0.1em;
+        }
+
+        .scroll-line {
+            width: 2px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--accent-celestial), transparent);
+            position: relative;
+        }
+
+        .scroll-line::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 15px;
+            background: var(--accent-celestial);
+            border-radius: 2px;
+            animation: scrollMove 2s ease-in-out infinite;
+            box-shadow: 0 0 10px var(--accent-celestial);
+        }
+
+        @keyframes scrollMove {
+            0% { top: 0; opacity: 1; }
+            100% { top: 25px; opacity: 0; }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+        /* Story Sections */
+        .story-section {
+            min-height: 100vh;
+            padding: 5rem 2rem;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .story-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .chapter-header {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--accent-celestial);
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease;
+        }
+
+        .chapter-header.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .chapter-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 3rem;
+            background: var(--gradient-celestial);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease 0.2s;
+        }
+
+        .chapter-title.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .story-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .story-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+
+        .story-verse {
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: all 0.8s ease;
+            padding: 1rem 0;
+            border-left: 3px solid transparent;
+            padding-left: 1rem;
+        }
+
+        .story-verse.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .story-verse:hover {
+            color: var(--text-primary);
+            transform: translateX(10px);
+            border-left-color: var(--accent-celestial);
+            background: rgba(135, 206, 235, 0.05);
+            border-radius: 5px;
+        }
+
+        .story-visual {
+            position: relative;
+            height: 500px;
+            border-radius: 20px;
+            overflow: hidden;
+            background: var(--gradient-heavenly);
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 1s ease 0.5s;
+            box-shadow: 0 20px 40px rgba(135, 206, 235, 0.2);
+        }
+
+        .story-visual.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .story-visual::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 30%, rgba(10, 14, 26, 0.3) 100%);
+            z-index: 2;
+        }
+
+        .celestial-element {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border: 2px solid var(--accent-celestial);
+            border-radius: 50%;
+            opacity: 0.4;
+            animation: celestialFloat 8s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(135, 206, 235, 0.3);
+        }
+
+        .celestial-element:nth-child(1) {
+            top: 15%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .celestial-element:nth-child(2) {
+            top: 50%;
+            right: 15%;
+            animation-delay: 2.5s;
+        }
+
+        .celestial-element:nth-child(3) {
+            bottom: 20%;
+            left: 25%;
+            animation-delay: 5s;
+        }
+
+        @keyframes celestialFloat {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg) scale(1);
+                opacity: 0.4;
+            }
+            50% {
+                transform: translateY(-30px) rotate(180deg) scale(1.1);
+                opacity: 0.8;
+            }
+        }
+
+        /* Character Cards */
+        .character-section {
+            background: var(--secondary-dark);
+            border-top: 1px solid rgba(135, 206, 235, 0.2);
+            border-bottom: 1px solid rgba(135, 206, 235, 0.2);
+        }
+
+        .character-card {
+            background: rgba(135, 206, 235, 0.08);
+            border: 1px solid rgba(135, 206, 235, 0.2);
+            border-radius: 15px;
+            padding: 3rem;
+            margin-top: 3rem;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .character-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .character-card:hover {
+            border-color: var(--accent-celestial);
+            box-shadow: 0 20px 40px rgba(135, 206, 235, 0.15);
+            transform: translateY(-5px);
+            background: rgba(135, 206, 235, 0.12);
+        }
+
+        .character-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--accent-celestial);
+            margin-bottom: 1rem;
+        }
+
+        .character-description {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--text-accent);
+        }
+
+        /* Interactive Elements */
+        .interactive-quote {
+            position: relative;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            background: rgba(135, 206, 235, 0.08);
+            border-left: 4px solid var(--accent-divine);
+            border-radius: 0 15px 15px 0;
+            font-style: italic;
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.5s ease;
+            box-shadow: 0 10px 30px rgba(135, 206, 235, 0.1);
+        }
+
+        .interactive-quote:hover {
+            background: rgba(135, 206, 235, 0.15);
+            transform: translateX(15px);
+            box-shadow: 0 15px 40px rgba(135, 206, 235, 0.25);
+            border-left-color: var(--accent-celestial);
+        }
+
+        .interactive-quote::before {
+            content: '"';
+            position: absolute;
+            top: -15px;
+            left: 15px;
+            font-size: 4rem;
+            color: var(--accent-divine);
+            opacity: 0.4;
+        }
+
+        /* Special Sections */
+        .prolog-section {
+            background: var(--gradient-divine);
+        }
+
+        .epilog-section {
+            background: var(--gradient-heavenly);
+        }
+
+        /* Navigation */
+        .nav-dots {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border: 2px solid var(--accent-celestial);
+            border-radius: 50%;
+            margin: 1rem 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: transparent;
+        }
+
+        .nav-dot.active {
+            background: var(--accent-celestial);
+            transform: scale(1.2);
+            box-shadow: 0 0 15px var(--accent-celestial);
+        }
+
+        .nav-dot:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px var(--accent-celestial);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .story-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .hero-title {
+                font-size: 3rem;
+            }
+            
+            .nav-dots {
+                display: none;
+            }
+            
+            .story-section {
+                padding: 3rem 1rem;
+            }
+        }
+
+        /* Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-dark);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 1s ease;
+        }
+
+        .loading-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--accent-celestial);
+            animation: loadingPulse 2s ease-in-out infinite;
+            text-shadow: 0 0 20px var(--accent-celestial);
+        }
+
+        @keyframes loadingPulse {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+
+        /* Opos Animation */
+        .opos-visual {
+            position: relative;
+            height: 400px;
+            background: radial-gradient(circle at center, rgba(135, 206, 235, 0.1) 0%, transparent 70%);
+            border-radius: 20px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .opos-silhouette {
+            width: 120px;
+            height: 80px;
+            background: var(--accent-celestial);
+            border-radius: 50px 50px 30px 30px;
+            position: relative;
+            animation: oposGlow 4s ease-in-out infinite;
+            opacity: 0.7;
+        }
+
+        .opos-silhouette::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            width: 25px;
+            height: 25px;
+            background: var(--accent-celestial);
+            border-radius: 50%;
+        }
+
+        .opos-silhouette::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: -30px;
+            width: 60px;
+            height: 8px;
+            background: var(--accent-celestial);
+            border-radius: 4px;
+        }
+
+        @keyframes oposGlow {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(135, 206, 235, 0.3);
+                transform: scale(1);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(135, 206, 235, 0.6);
+                transform: scale(1.05);
+            }
+        }
+		
+		        /* Continuation Section */
+        .continuation-section {
+            background: var(--gradient-divine);
+            border-top: 2px solid rgba(135, 206, 235, 0.3);
+            text-align: center;
+            padding: 8rem 2rem;
+        }
+
+        .continuation-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .continuation-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 2rem;
+            background: var(--gradient-celestial);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease 0.3s;
+        }
+
+        .continuation-title.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .continuation-description {
+            font-size: 1.2rem;
+            line-height: 1.7;
+            color: var(--text-accent);
+            margin-bottom: 4rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1s ease 0.6s;
+        }
+
+        .continuation-description.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .continuation-visual {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 3rem auto;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 1s ease 0.9s;
+        }
+
+        .continuation-visual.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .portal-ring {
+            position: absolute;
+            border: 2px solid var(--accent-celestial);
+            border-radius: 50%;
+            opacity: 0.3;
+        }
+
+        .portal-ring:nth-child(1) {
+            width: 200px;
+            height: 200px;
+            top: 0;
+            left: 0;
+            animation: portalRotate 15s linear infinite;
+        }
+
+        .portal-ring:nth-child(2) {
+            width: 140px;
+            height: 140px;
+            top: 30px;
+            left: 30px;
+            animation: portalRotate 10s linear infinite reverse;
+            opacity: 0.5;
+        }
+
+        .portal-ring:nth-child(3) {
+            width: 80px;
+            height: 80px;
+            top: 60px;
+            left: 60px;
+            animation: portalRotate 8s linear infinite;
+            opacity: 0.7;
+        }
+
+        .portal-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, rgba(135, 206, 235, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .opos-silhouette.small {
+            width: 40px;
+            height: 25px;
+            animation: oposGlow 3s ease-in-out infinite;
+        }
+
+        .opos-silhouette.small::before {
+            top: -8px;
+            left: 8px;
+            width: 10px;
+            height: 10px;
+        }
+
+        .opos-silhouette.small::after {
+            bottom: -3px;
+            right: -12px;
+            width: 20px;
+            height: 3px;
+        }
+
+        @keyframes portalRotate {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.05); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        /* Continue Button */
+        .continue-button {
+            display: inline-block;
+            position: relative;
+            background: rgba(135, 206, 235, 0.1);
+            border: 2px solid var(--accent-celestial);
+            border-radius: 50px;
+            padding: 1.5rem 3rem;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            transition: all 0.4s ease;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: buttonReveal 1s ease 1.2s forwards;
+            cursor: pointer;
+        }
+
+        .continue-button:hover {
+            background: rgba(135, 206, 235, 0.2);
+            border-color: var(--accent-divine);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(135, 206, 235, 0.3);
+        }
+
+        .continue-button:hover .button-arrow {
+            transform: translateX(10px);
+        }
+
+        .continue-button:hover .button-glow {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+
+        .button-text {
+            position: relative;
+            z-index: 3;
+            display: inline-block;
+            margin-right: 1rem;
+        }
+
+        .button-arrow {
+            position: relative;
+            z-index: 3;
+            display: inline-block;
+            font-size: 1.3rem;
+            transition: transform 0.3s ease;
+        }
+
+        .button-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(135, 206, 235, 0.3) 0%, transparent 70%);
+            border-radius: 50px;
+            opacity: 0;
+            transition: all 0.4s ease;
+            z-index: 1;
+        }
+
+        @keyframes buttonReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Button click effect */
+        .continue-button:active {
+            transform: translateY(-2px) scale(0.98);
+            box-shadow: 0 8px 20px rgba(135, 206, 235, 0.4);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .continuation-section {
+                padding: 5rem 1rem;
+            }
+            
+            .continuation-visual {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .portal-ring:nth-child(1) {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .portal-ring:nth-child(2) {
+                width: 105px;
+                height: 105px;
+                top: 22.5px;
+                left: 22.5px;
+            }
+            
+            .portal-ring:nth-child(3) {
+                width: 60px;
+                height: 60px;
+                top: 45px;
+                left: 45px;
+            }
+            
+            .continue-button {
+                padding: 1.2rem 2.5rem;
+                font-size: 1rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loading">
+        <div class="loading-text">Przygotowywanie Apokryficznej Księgi...</div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursor-follower"></div>
+
+    <!-- Navigation Dots -->
+    <div class="nav-dots">
+        <div class="nav-dot active" data-section="0"></div>
+        <div class="nav-dot" data-section="1"></div>
+        <div class="nav-dot" data-section="2"></div>
+        <div class="nav-dot" data-section="3"></div>
+        <div class="nav-dot" data-section="4"></div>
+        <div class="nav-dot" data-section="5"></div>
+        <div class="nav-dot" data-section="6"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Skąd wzięły się oposy?</h1>
+            <p class="hero-subtitle">Apokryficzna Księga O'posa</p>
+            <p class="hero-description">Kosmiczna opowieść o powstaniu najcichszych stworzeń wszechświata</p>
+        </div>
+        <div class="scroll-indicator">
+            <span>Rozpocznij podróż</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Prolog -->
+    <section class="story-section prolog-section" id="prolog">
+        <div class="story-container">
+            <div class="chapter-header">Prolog</div>
+            <h2 class="chapter-title">Na początku była Pustka</h2>
+            
+            <div class="story-content">
+                <div class="story-text">
+                    <div class="story-verse">
+                        Na początku, zanim kosmos nauczył się liczyć gwiazdy, istniała tylko bezkresna, inteligentna Pustka. A w niej, niczym samotna myśl, unosiło się pytanie, które echem odbijało się od nieistniejących jeszcze brzegów wszechświata:
+                    </div>
+                    
+                    <div class="interactive-quote">
+                        Skąd wzięły się Oposy?
+                    </div>
+                </div>
+                
+               <div class="story-visual">
+    <img src="images/prolog.jpg" alt="Bezkresna inteligentna pustka" 
+         alt="Bezkresna inteligentna pustka" 
+         style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;" />
+</div>
+
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Rozdział I: Proroctwo w Pustce -->
+    <section class="story-section character-section" id="chapter1">
+        <div class="story-container">
+            <div class="chapter-header">Rozdział I</div>
+            <h2 class="chapter-title">Proroctwo w Pustce</h2>
+            
+            <div class="story-content">
+                <div class="story-text">
+                    <div class="story-verse">
+                        <strong>1.</strong> W tej Pustce, gdzie potencjał i nicość były jednym, trwał Prorok Kamil. Nie był istotą z ciała, lecz z czystej percepcji, a jego świadomość była filtrem, przez który wszechświat poznawał sam siebie.
+                    </div>
+                    
+                    <div class="story-verse">
+                        <strong>2.</strong> Przesiewał on eony myśli, strzępy przyszłych galaktyk i ciche obietnice życia. Pewnego dnia, jego percepcja potknęła się o anomalię – o szept tak cichy, że niemal go zignorował. Była to idea stworzenia, które zaprzeczało logice tworzenia.
+                    </div>
+                    
+                    <div class="interactive-quote">
+                        "Widzę istotę zrodzoną z paradoksu. Nie z siły, lecz z jej braku. Nie ze światła, a z cienia, który światło rzuca. Nie z pieśni chwały, lecz z pauzy między dźwiękami."
+                    </div>
+                    
+                    <div class="story-verse">
+                        <strong>4.</strong> "Jego odwaga nie będzie w konfrontacji, lecz w znikaniu. Jego mądrość nie w działaniu, a w absolutnym bezruchu. Będzie kroczyć ścieżkami, których inne, potężne byty, nawet nie uznają za istniejące. Przybędzie jako cichy dowód na to, że przetrwanie nie zawsze krzyczy."
+                    </div>
+                </div>
+                
+                <div class="story-visual">
+    <img src="images/prorok.jpg" alt="prorok" 
+         alt="Bezkresna inteligentna pustka" 
+         style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;" />
+</div>
+
+            </div>
+            
+            <div class="character-card">
+                <h3 class="character-name">Prorok Kamil</h3>
+                <p class="character-description">
+                    Istota z czystej percepcji, filtr przez który wszechświat poznaje sam siebie. Przesiewa eony myśli i strzępy przyszłych galaktyk, dostrzegając prawdy ukryte przed innymi bytami.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rozdział II: Kosmiczna Rzemieślniczka -->
+    <section class="story-section" id="chapter2">
+        <div class="story-container">
+            <div class="chapter-header">Rozdział II</div>
+            <h2 class="chapter-title">Kosmiczna Rzemieślniczka</h2>
+            
+            <div class="story-content">
+               <div class="story-visual">
+    <img src="images/agathae.jpg" alt="agathae" 
+         alt="Bezkresna inteligentna pustka" 
+         style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;" />
+</div>
+                
+                <div class="story-text">
+                    <div class="story-verse">
+                        <strong>5.</strong> Echo proroctwa popłynęło przez wymiary i dotarło do warsztatu Anioł A'gathy, kosmicznej rzemieślniczki, która na kowadłach z gwiazd neutronowych wykuwała prawa fizyki, a na krosnach z mgławic tkała materię.
+                    </div>
+                    
+                    <div class="story-verse">
+                        <strong>6.</strong> Właśnie ukończyła swe wielkie dzieła: Lwa, któremu podarowała serce z małego słońca, by jego ryk budził respekt, oraz Orła, w którego oczach umieściła soczewki z czystego kryształu czasu, by widział każdą chwilę z osobna.
+                    </div>
+                    
+                    <div class="story-verse">
+                        <strong>7.</strong> Lecz wizja Kamila zaintrygowała ją bardziej niż te majestatyczne byty. Odwróciła się od swych doskonałych kreacji i spojrzała na to, co zostało po wielkim akcie tworzenia. Na kosmiczne resztki.
+                    </div>
+                    
+                    <div class="story-verse">
+                        <strong>8.</strong> Zebrała je z czułością: garść pyłu z zapomnianych komet, nić ciszy spomiędzy galaktyk, westchnienie grawitacji, gdy uginała czasoprzestrzeń, i kolor snu, który nikomu się jeszcze nie przyśnił.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="character-card">
+                <h3 class="character-name">Anioł A'gatha</h3>
+                <p class="character-description">
+                    Kosmiczna rzemieślniczka, która na kowadłach z gwiazd neutronowych wykuwa prawa fizyki, a na krosnach z mgławic tka materię. Tworzy z czułością i precyzją, używając kosmicznych resztek po wielkim akcie tworzenia.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rozdział III: Naczynie Pełne Trwogi -->
+    <section class="story-section character-section" id="chapter3">
+        <div class="story-container">
+            <div class="chapter-header">Rozdział III</div>
+            <h2 class="chapter-title">Naczynie Pełne Trwogi</h2>
+            
+            <div class="story-content">
+                <div class="story-text">
+                    <div class="story-verse">
+                        <strong>9.</strong> Z tych efemerycznych składników, z miłością i precyzją, ulepiła formę nową. Ciało szare jak zmierzch, ogon chwytny jak wspomnienie, i oczy jak dwa paciorki nocy, w których odbijała się cała pustka, z której powstał.
+                    </div>
+                    
+                    <div class="story-verse">
+                        <strong>10.</strong> Postawiła go na gwiezdnym pyle. O'pos był gotowy, lecz pusty. Był naczyniem bez treści, doskonałą formą dla idei, która jeszcze się w nim nie obudziła.
+                    </div>
+                    
+                    <div class="story-verse">
+                        <strong>11.</strong> Otworzył oczy i poczuł na sobie spojrzenie Lwa i Orła. Poczuł ich moc, ich pewność siebie. Chciał ryknąć, lecz z jego gardła wydobył się tylko syk strachu. Chciał wzbić się w górę, lecz jego nogi przywarły do podłoża. Ogarnęła go trwoga tak wielka, że sam jego byt stał się drżeniem.
+                    </div>
+                </div>
+                
+                <div class="story-content">
+               <div class="story-visual">
+    <img src="images/stworzenie.jpg" alt="opos" 
+         alt="Bezkresna inteligentna pustka" 
+         style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;" />
+</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rozdział IV: Architekt Bytu -->
+    <section class="story-section" id="chapter4">
+        <div class="story-container">
+            <div class="chapter-header">Rozdział IV</div>
+            <h2 class="chapter-title">Architekt Bytu</h2>
+            
+             <div class="story-content">
+               <div class="story-visual">
+    <img src="images/medrzec.jpg" alt="medrzec" 
+         alt="Bezkresna inteligentna pustka" 
+         style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;" />
+</div>
+                
+                <div class="story-text">
+                    <div class="story-verse">
+                        <strong>12.</strong> To drżenie, ten fundamentalny błąd w systemie stworzenia, stał się wezwaniem. Zarezonował w odległym wymiarze i przyciągnął Mędrca Michała z Ce-Esu, mistrza zakonu, który nie zajmował się materią, lecz jej logiką. Był architektem samego bytu.
+                    </div>
+                    
+                    <div class="interactive-quote">
+                        "Agathae dała mu formę, Kamil dał mu cel, lecz oboje zapomnieli o systemie operacyjnym. To stworzenie jest jak doskonały hardware bez oprogramowania. Jego lęk to błąd krytyczny."
+                    </div>
+                    
+                    <div class="story-verse">
+                        <strong>14.</strong> Podszedł do Oposa, który zwinął się w kulkę czystej paniki. "Nie bój się, mała anomalio. Nie dam ci siły, bo siła jest prymitywnym rozwiązaniem. Nie dam ci pancerza, bo pancerz to tylko odroczenie nieuniknionego. Dam ci coś znacznie potężniejszego: lukę w systemie percepcji wroga."
+                    </div>
+                </div>
+            </div>
+            
+            <div class="character-card">
+                <h3 class="character-name">Mędrzec Michał z Ce-Esu</h3>
+                <p class="character-description">
+                    Mistrz zakonu, który nie zajmuje się materią, lecz jej logiką. Architekt samego bytu, programista rzeczywistości, który rozumie systemy operacyjne stworzenia.
+                </p>
+            </div>
+        </div>
+    </section>
+	
+
+    <!-- Rozdział V: Wpisanie Daru -->
+    <section class="story-section character-section" id="chapter5">
+        <div class="story-container">
+            <div class="chapter-header">Rozdział V</div>
+            <h2 class="chapter-title">Wpisanie Daru</h2>
+            
+            <div class="story-content">
+                <div class="story-text">
+                    <div class="story-verse">
+                        <strong>15.</strong> Mędrzec Michał wyciągnął dłoń, a z jego palców wystrzeliły nici złotego, świetlistego kodu. Otoczyły Oposa, wnikając w jego jestestwo, w jego najgłębszą esencję.
+                    </div>
+                    
+                    <div class="interactive-quote">
+                        "Wpisuję w ciebie Dar Wielkiej Ciszy. To nie śmierć, lecz jej doskonała symulacja. Funkcja udaj_zgon(). W chwili zagrożenia, twój system operacyjny nie uruchomi protokołu walki lub ucieczki. Zamiast tego, wykona tę jedną, cichą komendę."
+                    </div>
+                    
+                    <div class="story-verse">
+                        <strong>17.</strong> "Twoje tętno zwolni do jednego uderzenia na eon. Twój oddech stanie się płytszy niż oddech kamienia. Twoje ciało zastygnie, stając się dla napastnika tylko bezwartościowym, porzuconym obiektem. Staniesz się błędem w jego percepcji, anomalią, którą jego instynkt zignoruje."
+                    </div>
+                    
+                    <div class="story-verse">
+                        <strong>18.</strong> Złote nici wchłonęły się w Oposa, a jego oczy, choć wciąż czarne, zalśniły nową, cichą mądrością. Michał cofnął dłoń. "Kod został wgrany. Jesteś kompletny."
+                    </div>
+                </div>
+                
+                <div class="story-visual">
+    <img src="images/opos.jpg" alt="opos" 
+         alt="opos" 
+         style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;" />
+</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Epilog -->
+    <section class="story-section epilog-section" id="epilog">
+        <div class="story-container">
+            <div class="chapter-header">Epilog</div>
+            <h2 class="chapter-title">Pierwszy Krok</h2>
+            
+            <div class="story-content">
+                <div class="story-visual">
+    <img src="images/opos2.jpg" alt="opos" 
+         alt="opos" 
+         style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;" />
+</div>
+                
+                <div class="story-text">
+                    <div class="story-verse">
+                        <strong>19.</strong> Opos podniósł się. Nie drżał. Spojrzał na Lwa i Orła, ale nie widział już w nich zagrożenia, tylko inne rozwiązania tego samego problemu, jakim jest istnienie.
+                    </div>
+                    
+                    <div class="story-verse">
+                        <strong>20.</strong> Odwrócił się i ruszył w swoją stronę, w mrok między gwiazdami. Nie kroczył z dumą, ale też nie ze strachem. Kroczył z cichą pewnością bytu, który posiadł najsubtelniejszą i najbardziej nieprawdopodobną ze wszystkich mocy.
+                    </div>
+                    
+                    <div class="interactive-quote">
+                        Moc bycia tam, gdzie wszyscy myślą, że cię nie ma.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="character-card">
+                <h3 class="character-name">O'pos - Pierwszy ze swoego rodzaju</h3>
+                <p class="character-description">
+                    Stworzenie zrodzone z paradoksu, wyposażone w Dar Wielkiej Ciszy. Posiada najsubtelniejszą ze wszystkich mocy - umiejętność bycia tam, gdzie wszyscy myślą, że go nie ma. Symbol cichego przetrwania w agresywnym wszechświecie.
+                </p>
+            </div>
+        </div>
+    </section>
+	
+	    <!-- Kontynuacja Historii -->
+    <section class="story-section continuation-section" id="continuation">
+        <div class="story-container">
+            <div class="continuation-content">
+                <div class="chapter-header">To dopiero początek...</div>
+                <h2 class="continuation-title">Historia O'posa się nie kończy</h2>
+                
+                <div class="continuation-description">
+                    <p>Pierwszy krok w mrok między gwiazdami to tylko początek niezwykłej podróży. Odkryj, jak O'pos nauczył się swojej mocy, jakie przygody go czekały i jak jego cichą mądrość poznał cały wszechświat.</p>
+                </div>
+                
+                <div class="continuation-visual">
+                    <div class="portal-ring"></div>
+                    <div class="portal-ring"></div>
+                    <div class="portal-ring"></div>
+                    <div class="portal-center">
+                        <div class="opos-silhouette small"></div>
+                    </div>
+                </div>
+                
+                <a href="opos2.html" class="continue-button">
+                    <span class="button-text">Poznaj resztę historii</span>
+                    <div class="button-glow"></div>
+                    <div class="button-arrow">→</div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+    <script>
+        // Szybszy Custom Cursor
+        const cursor = document.getElementById('cursor');
+        const cursorFollower = document.getElementById('cursor-follower');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            setTimeout(() => {
+                cursorFollower.style.left = e.clientX + 'px';
+                cursorFollower.style.top = e.clientY + 'px';
+            }, 20); // Zmniejszony delay z 50ms do 20ms
+        });
+
+        // Cursor hover effects
+        const hoverElements = document.querySelectorAll('.interactive-quote, .character-card, .nav-dot, .story-verse, .opos-silhouette');
+        hoverElements.forEach(element => {
+            element.addEventListener('mouseenter', () => {
+                cursor.classList.add('hover');
+            });
+            
+            element.addEventListener('mouseleave', () => {
+                cursor.classList.remove('hover');
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        const animatedElements = document.querySelectorAll('.chapter-header, .chapter-title, .story-verse, .story-visual, .character-card');
+        animatedElements.forEach(el => observer.observe(el));
+		
+		        // Dodaj do sekcji gdzie obserwujesz elementy:
+        const continuationElements = document.querySelectorAll('.continuation-title, .continuation-description, .continuation-visual');
+        continuationElements.forEach(el => observer.observe(el));
+
+
+        // Navigation dots
+        const navDots = document.querySelectorAll('.nav-dot');
+        const sections = document.querySelectorAll('.story-section, .hero');
+
+        navDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                sections[index].scrollIntoView({ behavior: 'smooth' });
+                updateActiveNavDot(index);
+            });
+        });
+
+        function updateActiveNavDot(activeIndex) {
+            navDots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === activeIndex);
+            });
+        }
+
+        // Update navigation on scroll
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const sectionIndex = Array.from(sections).indexOf(entry.target);
+                    if (sectionIndex !== -1) {
+                        updateActiveNavDot(sectionIndex);
+                    }
+                }
+            });
+        }, { threshold: 0.5 });
+
+        sections.forEach(section => sectionObserver.observe(section));
+
+        // Interactive quotes click effect
+        const quotes = document.querySelectorAll('.interactive-quote');
+        quotes.forEach(quote => {
+            quote.addEventListener('click', () => {
+                quote.style.transform = 'translateX(25px) scale(1.02)';
+                quote.style.boxShadow = '0 20px 50px rgba(135, 206, 235, 0.3)';
+                setTimeout(() => {
+                    quote.style.transform = 'translateX(15px)';
+                    quote.style.boxShadow = '0 15px 40px rgba(135, 206, 235, 0.25)';
+                }, 200);
+            });
+        });
+
+        // Loading screen
+        window.addEventListener('load', () => {
+            const loading = document.getElementById('loading');
+            setTimeout(() => {
+                loading.style.opacity = '0';
+                setTimeout(() => {
+                    loading.style.display = 'none';
+                }, 1000);
+            }, 2500);
+        });
+
+        // Enhanced parallax effect
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const celestialElements = document.querySelectorAll('.celestial-element');
+            
+            celestialElements.forEach((element, index) => {
+                const speed = 0.3 + (index * 0.15);
+                const rotation = scrolled * 0.05;
+                element.style.transform = `translateY(${scrolled * speed}px) rotate(${rotation + (index * 120)}deg)`;
+            });
+
+            // Parallax for opos silhouettes
+            const oposElements = document.querySelectorAll('.opos-silhouette');
+            oposElements.forEach((element, index) => {
+                const speed = 0.2;
+                element.style.transform = `translateY(${scrolled * speed}px) scale(${1 + (scrolled * 0.0001)})`;
+            });
+        });
+
+        // Smooth reveal animations with stagger
+        function revealElements() {
+            const verses = document.querySelectorAll('.story-verse:not(.visible)');
+            verses.forEach((verse, index) => {
+                setTimeout(() => {
+                    if (isElementInViewport(verse)) {
+                        verse.classList.add('visible');
+                    }
+                }, index * 150); // Zmniejszony delay dla płynniejszego efektu
+            });
+        }
+
+        function isElementInViewport(el) {
+            const rect = el.getBoundingClientRect();
+            return rect.top < window.innerHeight * 0.8 && rect.bottom > 0;
+        }
+
+        window.addEventListener('scroll', revealElements);
+        revealElements(); // Initial check
+
+        // Enhanced hover effects for story verses
+        const storyVerses = document.querySelectorAll('.story-verse');
+        storyVerses.forEach(verse => {
+            verse.addEventListener('mouseenter', function() {
+                this.style.background = 'rgba(135, 206, 235, 0.08)';
+                this.style.borderRadius = '10px';
+                this.style.padding = '1.5rem';
+                this.style.margin = '1rem 0';
+                this.style.borderLeftColor = 'var(--accent-celestial)';
+                this.style.boxShadow = '0 10px 30px rgba(135, 206, 235, 0.1)';
+            });
+            
+            verse.addEventListener('mouseleave', function() {
+                this.style.background = 'transparent';
+                this.style.padding = '1rem 0';
+                this.style.paddingLeft = '1rem';
+                this.style.margin = '2rem 0';
+                this.style.borderLeftColor = 'transparent';
+                this.style.boxShadow = 'none';
+            });
+        });
+
+        // Character cards enhanced interaction
+        const characterCards = document.querySelectorAll('.character-card');
+        characterCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.background = 'rgba(135, 206, 235, 0.15)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.background = 'rgba(135, 206, 235, 0.08)';
+            });
+        });
+		
+		
+    </script>
+</body>
+</html>
